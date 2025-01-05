@@ -22,7 +22,7 @@ class SystemMenuPage(MenuPage):
             image_path=get_image_file_path("menu/system.gif"),
             image_size=(29, 29),
             Pages=[
-                LoginDetailsPage,
+                # LoginDetailsPage,
                 BatteryPage,
                 CPUPage,
                 MemoryPage,
