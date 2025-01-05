@@ -8,6 +8,30 @@ from pt_miniscreen.core import Component
 
 logger = logging.getLogger(__name__)
 
+class BlankScreensaver(Component):
+
+    def __init__(self, **kwargs):
+        self.animation_interval = None
+
+        super().__init__(
+            **kwargs
+        )
+
+    def start_animating(self):
+        self.animation_interval = self.create_interval(
+            self.update, timeout=1
+        )
+
+    def stop_animating(self):
+        if self.animation_interval:
+            self.remove_interval(self.animation_interval)
+
+    def update(self):
+        self.state.update()
+
+    def render(self, image):
+        return image
+
 
 # Adapted from https://github.com/rm-hull/luma.examples/blob/master/examples/starfield.py
 
