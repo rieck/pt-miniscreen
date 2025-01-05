@@ -27,7 +27,7 @@ from pt_miniscreen.pages.root.projects import (
     ProjectsMenuPage,
     ProjectPage,
 )
-from pt_miniscreen.pages.root.screensaver import StarfieldScreensaver
+from pt_miniscreen.pages.root.screensaver import BlankScreensaver
 from pt_miniscreen.pages.root.settings_menu import SettingsMenuPage
 from pt_miniscreen.pages.root.system_menu import SystemMenuPage
 from pt_miniscreen.utils import ButtonEvents, get_image_file_path
@@ -81,7 +81,7 @@ class RootComponent(Component):
             upper_icon_padding=self.gutter_icon_padding,
             lower_icon_padding=self.gutter_icon_padding,
         )
-        self.screensaver = self.create_child(StarfieldScreensaver)
+        self.screensaver = self.create_child(BlankScreensaver)
         self.bootsplash = self.create_child(
             Image, loop=False, image_path=get_bootsplash_image_path()
         )
