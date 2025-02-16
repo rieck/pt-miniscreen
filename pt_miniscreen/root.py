@@ -53,7 +53,6 @@ class RootPageList(EnterablePageList):
                 getOverviewPage(),
                 SystemMenuPage,
                 NetworkMenuPage,
-                ProjectsMenuPage,
                 SettingsMenuPage,
             ],
             use_snapshot_when_scrolling=False,
