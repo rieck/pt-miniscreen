@@ -5,7 +5,7 @@ from subprocess import Popen, check_output
 
 from pitop.common.command_runner import run_command
 from pitop.common.configuration_file import add_section, has_section, remove_section
-from pitop.common.sys_info import get_ap_mode_status, get_systemd_enabled_state
+from pitop.common.sys_info import get_systemd_enabled_state
 
 logger = logging.getLogger(__name__)
 
@@ -56,6 +56,26 @@ def change_wifi_mode():
     else:
         run_command("/usr/bin/wifi-ap-sta start", timeout=30)
 
+def get_ap_mode_status():
+    """ Copied from pi-top Python SDK for convenience"""
+    key_lookup = {
+        "State": "state",
+        "Access Point Network SSID": "ssid",
+        "Access Point Wi-Fi Password": "passphrase",
+        "Access Point IP Address": "ip_address",
+    }
+
+    data = {}
+    try:
+        ap_mode_status = run_command("/usr/bin/wifi-ap-sta status", timeout=10)
+        for str in ap_mode_status.strip().split("\n"):
+            k, v = str.split(":")
+            key = key_lookup.get(k.strip())
+            if key:
+                data[key] = v.strip()
+    except Exception:
+        pass
+    return data
 
 def get_wifi_ap_state():
     status_data = get_ap_mode_status()
